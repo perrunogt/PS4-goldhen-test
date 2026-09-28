@@ -14,6 +14,8 @@
       --text: #eafff3;
       --muted: #537565;
       --red: #ff365e;
+      --gold: #ffea00;
+      --gold-glow: #ffe600;
     }
 
     * {
@@ -64,110 +66,160 @@
 
     #main-container {
       position: relative;
+
       width: min(88vw, 440px);
       height: min(88vw, 440px);
+
       min-width: 290px;
       min-height: 290px;
+
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+
       background: var(--panel);
+
       border: 1px solid rgba(0, 255, 136, 0.22);
       border-radius: 30px;
+
       box-shadow:
         0 10px 35px rgba(0, 0, 0, 0.72),
         0 0 18px rgba(0, 255, 136, 0.07);
+
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
     }
 
     #main-container::before,
     #main-container::after {
       content: "";
+
       position: absolute;
+
       width: 42px;
       height: 42px;
+
       border-color: var(--green);
       opacity: 0.7;
+      transition: border-color 0.4s ease;
     }
 
     #main-container::before {
       top: -1px;
       left: -1px;
+
       border-top: 2px solid;
       border-left: 2px solid;
+
       border-radius: 30px 0 0 0;
     }
 
     #main-container::after {
       right: -1px;
       bottom: -1px;
+
       border-right: 2px solid;
       border-bottom: 2px solid;
+
       border-radius: 0 0 30px 0;
     }
 
     #brand {
       position: absolute;
       top: 38px;
+
       font-family: monospace, sans-serif;
       font-size: clamp(17px, 5vw, 23px);
       font-weight: 800;
+
       letter-spacing: 0.13em;
+
       color: #fff;
-      text-shadow: 0 0 8px rgba(0, 255, 136, 0.55);
+
+      text-shadow:
+        0 0 8px rgba(0, 255, 136, 0.55);
+
+      transition: color 0.4s ease, text-shadow 0.4s ease;
     }
 
     #brand::before {
       content: "GOLDHEN HOST";
+
       display: block;
+
       margin-bottom: 6px;
+
       text-align: center;
+
       font-size: 8px;
       font-weight: 400;
+
       letter-spacing: 0.35em;
+
       color: var(--muted);
     }
 
     #visual-indicator {
       position: relative;
+
       width: 190px;
       height: 150px;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       margin-top: 38px;
     }
 
     .core {
       position: relative;
+
       width: 58px;
       height: 58px;
+
       border-radius: 14px;
+
       transform: rotate(45deg);
+
       background: var(--green);
-      box-shadow: 0 0 14px var(--green);
+
+      box-shadow:
+        0 0 14px var(--green);
+
       z-index: 5;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
     }
 
     .core::before {
       content: "";
+
       position: absolute;
+
       width: 22px;
       height: 22px;
+
       top: 18px;
       left: 18px;
+
       background: #fff;
+
       border-radius: 5px;
     }
 
     #visual-indicator::before,
     #visual-indicator::after {
       content: "";
+
       position: absolute;
+
       width: 110px;
       height: 110px;
+
       border: 1px solid rgba(0, 255, 136, 0.18);
+
       transform: rotate(45deg);
+      transition: border-color 0.4s ease;
     }
 
     #visual-indicator::after {
@@ -178,19 +230,26 @@
 
     #spin {
       position: absolute;
+
       width: 180px;
       height: 70px;
+
       z-index: 2;
     }
 
     #spin::before,
     #spin::after {
       content: "";
+
       position: absolute;
+
       left: 50%;
+
       width: 140px;
       height: 2px;
+
       transform: translateX(-50%);
+
       background:
         linear-gradient(
           90deg,
@@ -210,20 +269,34 @@
 
     .pulse {
       position: absolute;
+
       width: 130px;
       height: 130px;
+
       border-radius: 18px;
+
       border: 1px dashed rgba(0, 255, 136, 0.16);
+
       transform: rotate(45deg);
+      transition: border-color 0.4s ease;
     }
 
+    /* ESTADON DE ÉXITO (GOLDHEN ACTIVADO) */
     body.done #main-container {
-      border-color: rgba(0, 255, 136, 0.55);
-      box-shadow: 0 0 28px rgba(0, 255, 136, 0.18);
+      border-color: rgba(255, 234, 0, 0.7);
+
+      box-shadow:
+        0 0 28px rgba(255, 234, 0, 0.35);
+    }
+
+    body.done #main-container::before,
+    body.done #main-container::after {
+      border-color: var(--gold);
     }
 
     body.done #brand {
-      color: var(--green3);
+      color: var(--gold);
+      text-shadow: 0 0 10px rgba(255, 234, 0, 0.8);
     }
 
     body.done #spin {
@@ -231,17 +304,36 @@
     }
 
     body.done .pulse {
-      border-color: rgba(0, 255, 136, 0.55);
+      border-color: rgba(255, 234, 0, 0.7);
     }
 
     body.done .core {
-      background: var(--green);
-      box-shadow: 0 0 20px var(--green);
+      background: var(--gold);
+
+      box-shadow:
+        0 0 25px var(--gold-glow);
+    }
+
+    body.done #exploit-title {
+      color: var(--gold);
+      border-color: var(--gold);
+      background: rgba(18, 15, 0, 0.96);
+      box-shadow: 0 0 15px rgba(255, 234, 0, 0.35);
+    }
+
+    body.done #footer::before {
+      color: var(--gold);
+    }
+
+    body.done #credits {
+      color: var(--gold);
     }
 
     body.fail #main-container {
       border-color: rgba(255, 54, 94, 0.45);
-      box-shadow: 0 0 28px rgba(255, 54, 94, 0.16);
+
+      box-shadow:
+        0 0 28px rgba(255, 54, 94, 0.16);
     }
 
     body.fail #brand {
@@ -258,20 +350,31 @@
 
     body.fail .core {
       background: var(--red);
-      box-shadow: 0 0 16px var(--red);
+
+      box-shadow:
+        0 0 16px var(--red);
     }
 
     #msg {
       position: fixed;
+
       left: 50%;
       bottom: 78px;
+
       transform: translateX(-50%);
+
       display: none;
+
       width: 90%;
+
       text-align: center;
+
       font-family: monospace, sans-serif;
+
       font-size: 11px;
+
       letter-spacing: 0.18em;
+
       color: var(--red);
     }
 
@@ -279,60 +382,81 @@
       display: block;
     }
 
-    body.done #msg {
-      display: block;
-      color: #ffd400;
-      font-weight: 700;
-      text-shadow:
-        0 0 10px rgba(255, 212, 0, 0.70);
-    }
-
     #footer {
       position: fixed;
+
       bottom: 25px;
+
       font-family: monospace, sans-serif;
+
       font-size: 9px;
+
       letter-spacing: 0.22em;
+
       color: rgba(140, 210, 170, 0.4);
     }
 
     #footer::before {
       content: "◆ ";
+
       color: var(--green);
     }
 
     #exploit-title {
       position: fixed;
+
       top: 22px;
       left: 50%;
+
       transform: translateX(-50%);
+
       z-index: 10;
+
       padding: 10px 22px;
+
       color: var(--green);
+
       border: 1px solid rgba(0, 255, 136, 0.45);
       border-radius: 10px;
+
       background: rgba(2, 12, 7, 0.96);
+
       font-family: monospace, sans-serif;
+
       font-size: 11px;
       font-weight: 700;
+
       letter-spacing: 0.10em;
+
       text-align: center;
+
       white-space: nowrap;
+      transition: all 0.4s ease;
     }
 
     #credits {
       position: fixed;
+
       left: 50%;
       bottom: 48px;
+
       transform: translateX(-50%);
+
       z-index: 10;
+
       width: min(92vw, 700px);
+
       color: var(--green);
+
       font-family: monospace, sans-serif;
+
       font-size: 10px;
       line-height: 1.5;
+
       letter-spacing: 0.05em;
+
       text-align: center;
+      transition: color 0.4s ease;
     }
 
     #wrap {
@@ -344,96 +468,86 @@
       display: none;
     }
 
-    /* LOG PEQUENO */
-    #wrap {
-      position: fixed;
-      top: 50%;
-      right: 20px;
-      width: 300px;
-      height: 330px;
-      transform: translateY(-50%);
-      padding: 0;
-      z-index: 20;
+    body.log {
+      display: block;
+
+      overflow: auto;
+
+      padding: 20px;
+
+      background: var(--bg);
     }
 
-    #state {
+    body.log::before,
+    body.log::after,
+    body.log #main-container,
+    body.log #footer,
+    body.log #exploit-title,
+    body.log #credits {
+      display: none;
+    }
+
+    body.log #wrap {
       display: block;
-      height: 30px;
-      margin-bottom: 7px;
-      padding: 6px 9px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
+
+      max-width: 900px;
+
+      margin: 0 auto;
+    }
+
+    body.log #state {
+      display: block;
+
+      margin-bottom: 12px;
+
       font-family: monospace, sans-serif;
-      font-size: 10px;
+
+      font-size: 18px;
+
       font-weight: 700;
-      color: var(--green);
-      background: #000;
-      border: 1px solid rgba(0, 255, 136, 0.28);
-      border-radius: 6px;
+
+      color: var(--text);
     }
 
-    #out {
+    body.log #out {
       display: block;
-      width: 100%;
-      height: 293px;
-      padding: 10px;
+
+      max-height: calc(100vh - 100px);
+
       overflow-y: auto;
-      overflow-x: hidden;
+
+      padding: 16px;
+
       white-space: pre-wrap;
-      word-break: break-word;
-      font: 8px/1.35 monospace, sans-serif;
-      text-align: left;
-      color: #d7ffe8;
-      background: #000;
-      border: 1px solid rgba(0, 255, 136, 0.28);
-      border-radius: 6px;
-      box-shadow:
-        0 8px 24px rgba(0, 0, 0, 0.65),
-        inset 0 0 10px rgba(0, 255, 136, 0.025);
+
+      font: 12px/1.6 monospace, sans-serif;
+
+      color: var(--text);
+
+      background: rgba(255, 255, 255, 0.02);
+
+      border: 1px solid rgba(0, 255, 136, 0.12);
+
+      border-radius: 12px;
     }
 
-    #out::-webkit-scrollbar {
-      width: 4px;
+    .ok,
+    .safe {
+      color: var(--green);
     }
 
-    #out::-webkit-scrollbar-track {
-      background: #000;
+    .bad,
+    .danger {
+      color: var(--red);
     }
 
-    #out::-webkit-scrollbar-thumb {
-      background: #00b968;
-      border-radius: 8px;
+    .warn {
+      color: #e3b341;
     }
 
-    @media (max-width: 900px) {
-      #wrap {
-        right: 10px;
-        width: 270px;
-        height: 300px;
-      }
-
-      #out {
-        height: 263px;
-        font-size: 7px;
-      }
-    }
-
-    @media (max-width: 700px) {
-      #wrap {
-        right: 8px;
-        width: 230px;
-        height: 270px;
-      }
-
-      #out {
-        height: 233px;
-        font-size: 6px;
-      }
-
-      #state {
-        font-size: 9px;
-      }
+    code {
+      color: #72c99c;
+      font-family: monospace, sans-serif;
     }
 
     @media (max-width: 600px) {
@@ -473,7 +587,7 @@
     </div>
   </div>
 
-  <div id="msg">GOLDHEN ACTIVADO</div>
+  <div id="msg">Restart your console</div>
 
   <div id="credits">
     Agradecimientos a Raw game y sistro por la distribución del exploit y carga de GoldHEN
@@ -488,21 +602,18 @@
     PERRUNOGT // GOLDHEN HOST
   </div>
 
-  <script>
-    (function () {
-      try {
-        var s = location.search || "";
-        var sep = s ? "&" : "?";
-        if (s.indexOf("log=1") < 0) s += sep + "log=1";
-        sep = s.indexOf("?") >= 0 ? "&" : "?";
-        if (s.indexOf("verbose=1") < 0) s += sep + "verbose=1";
-        history.replaceState(null, "", location.pathname + s + location.hash);
-      } catch (e) {}
-    })();
-  </script>
-
   <script type="module">
     import "./jb.js?v=10";
+
+    // Observador para detectar cuándo el exploit añade la clase 'done' al body
+    const observer = new MutationObserver(() => {
+      if (document.body.classList.contains("done")) {
+        const title = document.getElementById("exploit-title");
+        if (title) title.textContent = "GOLDHEN ACTIVADO";
+      }
+    });
+
+    observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
   </script>
 
 </body>
