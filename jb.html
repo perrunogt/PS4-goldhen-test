@@ -451,7 +451,7 @@
 
 <body>
 
-  <audio id="bgmusic" autoplay loop preload="auto">
+  <audio id="bgmusic" preload="auto" loop playsinline>
     <source src="music.mp3" type="audio/mpeg">
   </audio>
 
@@ -497,11 +497,57 @@
     })();
   </script>
 
+  <script>
+    (function () {
+      var music = document.getElementById("bgmusic");
+      if (!music) return;
+
+      music.volume = 0.5;
+      music.muted = false;
+
+      function tryPlay() {
+        try {
+          var p = music.play();
+          if (p && typeof p.catch === "function") {
+            p.catch(function () {
+              music.muted = true;
+              var mutedPlay = music.play();
+              if (mutedPlay && typeof mutedPlay.catch === "function") {
+                mutedPlay.catch(function () {});
+              }
+            });
+          }
+        } catch (e) {
+          try {
+            music.muted = true;
+            var mutedPlay = music.play();
+            if (mutedPlay && typeof mutedPlay.catch === "function") {
+              mutedPlay.catch(function () {});
+            }
+          } catch (e2) {}
+        }
+      }
+
+      function enableSound() {
+        try {
+          music.muted = false;
+          music.volume = 0.5;
+          var p = music.play();
+          if (p && typeof p.catch === "function") p.catch(function () {});
+        } catch (e) {}
+      }
+
+      tryPlay();
+
+      document.addEventListener("click", enableSound, { once: true });
+      document.addEventListener("touchstart", enableSound, { once: true });
+      document.addEventListener("keydown", enableSound, { once: true });
+    })();
+  </script>
+
   <script type="module">
     import "./jb.js?v=10";
   </script>
 
 </body>
 </html>
-
-
