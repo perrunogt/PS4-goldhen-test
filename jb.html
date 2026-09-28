@@ -279,14 +279,6 @@
       display: block;
     }
 
-    body.done #msg {
-      display: block;
-      color: #ffd400;
-      font-weight: 700;
-      text-shadow:
-        0 0 10px rgba(255, 212, 0, 0.70);
-    }
-
     #footer {
       position: fixed;
       bottom: 25px;
@@ -459,6 +451,10 @@
 
 <body>
 
+  <audio id="bgmusic" autoplay loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
   <div id="exploit-title">
     CARGA DE EXPLOIT GOLDHEN 11.00 A 13.52
   </div>
@@ -473,7 +469,7 @@
     </div>
   </div>
 
-  <div id="msg">GOLDHEN ACTIVADO</div>
+  <div id="msg">Restart your console</div>
 
   <div id="credits">
     Agradecimientos a Raw game y sistro por la distribución del exploit y carga de GoldHEN
@@ -507,4 +503,5 @@
 
 </body>
 </html>
+
 
