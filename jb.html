@@ -3,303 +3,657 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
   <title>HOST:PERRUNOGT</title>
+
   <style>
     :root {
       --bg: #020504;
-      --panel: rgba(4, 14, 9, 0.95);
+      --panel: rgba(4, 14, 9, 0.96);
       --green: #00ff88;
-      --green2: #00c96b;
       --green3: #65ffb3;
       --text: #eafff3;
       --muted: #537565;
       --red: #ff365e;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { width: 100%; height: 100%; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
 
     body {
       position: relative;
       overflow: hidden;
+
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #020504;
+
+      background: var(--bg);
       color: var(--text);
-      font-family: system-ui, -apple-system, sans-serif;
-      transform: translateZ(0); /* Aceleración por hardware GPU */
+
+      font-family: monospace, sans-serif;
     }
 
     body::before {
       content: "";
       position: absolute;
       inset: 0;
-      background-image: 
-        linear-gradient(rgba(0,255,136,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,255,136,0.025) 1px, transparent 1px);
+
+      background:
+        linear-gradient(
+          rgba(0, 255, 136, 0.02) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(0, 255, 136, 0.02) 1px,
+          transparent 1px
+        );
+
       background-size: 40px 40px;
+
       pointer-events: none;
     }
 
     #main-container {
       position: relative;
+
       width: min(88vw, 440px);
       height: min(88vw, 440px);
+
       min-width: 290px;
       min-height: 290px;
+
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+
       background: var(--panel);
-      border: 1px solid rgba(0,255,136,0.25);
+
+      border: 1px solid rgba(0, 255, 136, 0.25);
       border-radius: 30px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 20px rgba(0,255,136,0.1);
-      transition: border-color .3s ease, box-shadow .3s ease;
-      will-change: transform, border-color;
+
+      box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.75),
+        0 0 20px rgba(0, 255, 136, 0.08);
+
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
     }
 
-    #main-container::before, #main-container::after {
+    #main-container::before,
+    #main-container::after {
       content: "";
+
       position: absolute;
+
       width: 42px;
       height: 42px;
+
       border-color: var(--green);
-      opacity: .75;
+
+      opacity: 0.75;
     }
 
-    #main-container::before { top: -1px; left: -1px; border-top: 2px solid; border-left: 2px solid; border-radius: 30px 0 0 0; }
-    #main-container::after { right: -1px; bottom: -1px; border-right: 2px solid; border-bottom: 2px solid; border-radius: 0 0 30px 0; }
+    #main-container::before {
+      top: -1px;
+      left: -1px;
+
+      border-top: 2px solid;
+      border-left: 2px solid;
+
+      border-radius: 30px 0 0 0;
+    }
+
+    #main-container::after {
+      right: -1px;
+      bottom: -1px;
+
+      border-right: 2px solid;
+      border-bottom: 2px solid;
+
+      border-radius: 0 0 30px 0;
+    }
 
     #brand {
       position: absolute;
       top: 38px;
+
       font-family: monospace, sans-serif;
       font-size: clamp(17px, 5vw, 23px);
       font-weight: 800;
-      letter-spacing: .13em;
+
+      letter-spacing: 0.13em;
+
       color: #fff;
-      text-shadow: 0 0 8px rgba(0,255,136,.8);
+
+      text-shadow:
+        0 0 8px rgba(0, 255, 136, 0.65);
     }
 
     #brand::before {
       content: "GOLDHEN HOST";
+
       display: block;
+
       margin-bottom: 6px;
+
       text-align: center;
+
       font-size: 8px;
       font-weight: 400;
-      letter-spacing: .35em;
+
+      letter-spacing: 0.35em;
+
       color: var(--muted);
     }
 
     #visual-indicator {
       position: relative;
+
       width: 190px;
       height: 150px;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       margin-top: 38px;
     }
 
     .core {
       position: relative;
+
       width: 58px;
       height: 58px;
+
       border-radius: 14px;
+
       transform: rotate(45deg);
+
       background: var(--green);
-      box-shadow: 0 0 15px var(--green);
-      animation: reactor 1.5s ease-in-out infinite;
+
+      box-shadow:
+        0 0 14px var(--green);
+
       z-index: 5;
-      will-change: transform;
+
+      animation: reactor 1.5s ease-in-out infinite;
     }
 
     .core::before {
       content: "";
+
       position: absolute;
+
       width: 22px;
       height: 22px;
+
       top: 18px;
       left: 18px;
+
       background: #fff;
+
       border-radius: 5px;
     }
 
-    #visual-indicator::before, #visual-indicator::after {
+    #visual-indicator::before,
+    #visual-indicator::after {
       content: "";
+
       position: absolute;
+
       width: 110px;
       height: 110px;
-      border: 1px solid rgba(0,255,136,.25);
+
+      border: 1px solid rgba(0, 255, 136, 0.22);
+
       transform: rotate(45deg);
-      animation: diamond 3s linear infinite;
-      will-change: transform;
+
+      animation: diamond 4s linear infinite;
     }
 
     #visual-indicator::after {
       width: 150px;
       height: 150px;
-      border-color: rgba(0,255,136,.1);
-      animation-duration: 6s;
+
+      border-color: rgba(0, 255, 136, 0.08);
+
+      animation-duration: 7s;
       animation-direction: reverse;
     }
 
     #spin {
       position: absolute;
+
       width: 180px;
       height: 70px;
+
       z-index: 2;
     }
 
-    #spin::before, #spin::after {
+    #spin::before,
+    #spin::after {
       content: "";
+
       position: absolute;
+
       left: 50%;
+
       width: 180px;
       height: 2px;
+
       transform: translateX(-50%);
-      background: linear-gradient(90deg, transparent, var(--green), transparent);
-      animation: energy 1.2s ease-in-out infinite;
-      will-change: width, opacity;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          var(--green),
+          transparent
+        );
+
+      animation: energy 1.4s ease-in-out infinite;
     }
 
-    #spin::before { top: 8px; }
-    #spin::after { bottom: 8px; animation-delay: .6s; }
+    #spin::before {
+      top: 8px;
+    }
+
+    #spin::after {
+      bottom: 8px;
+
+      animation-delay: 0.7s;
+    }
 
     .pulse {
       position: absolute;
+
       width: 130px;
       height: 130px;
+
       border-radius: 18px;
-      border: 1px dashed rgba(0,255,136,.22);
+
+      border: 1px dashed rgba(0, 255, 136, 0.18);
+
       transform: rotate(45deg);
-      animation: pulseBox 2s ease-in-out infinite;
-      will-change: transform, opacity;
+
+      animation: pulseBox 2.5s ease-in-out infinite;
     }
 
-    /* Estados de Éxito y Error */
-    body.done #main-container { border-color: var(--green); box-shadow: 0 0 30px rgba(0,255,136,.3); }
-    body.done #brand { color: var(--green3); }
-    body.done #spin { display: none; }
-    body.done .pulse { border-color: rgba(0,255,136,.65); animation: none; }
-    body.done .core { animation: successCore 1.2s ease-in-out infinite; background: var(--green); }
+    body.done #main-container {
+      border-color: var(--green);
 
-    body.fail #main-container { border-color: var(--red); box-shadow: 0 0 30px rgba(255,54,94,.3); }
-    body.fail #brand { color: var(--red); }
-    body.fail #spin { display: none; }
-    body.fail .pulse { border-color: var(--red); animation: none; }
-    body.fail .core { background: var(--red); box-shadow: 0 0 15px var(--red); animation: none; }
+      box-shadow:
+        0 0 30px rgba(0, 255, 136, 0.22);
+    }
 
-    #msg {
-      position: fixed;
-      left: 50%;
-      bottom: 78px;
-      transform: translateX(-50%);
+    body.done #brand {
+      color: var(--green3);
+    }
+
+    body.done #spin {
       display: none;
-      width: 90%;
-      text-align: center;
-      font-family: monospace, sans-serif;
-      font-size: 11px;
-      letter-spacing: .18em;
+    }
+
+    body.done .pulse {
+      border-color: rgba(0, 255, 136, 0.55);
+      animation: none;
+    }
+
+    body.done .core {
+      animation: successCore 1.2s ease-in-out infinite;
+      background: var(--green);
+    }
+
+    body.fail #main-container {
+      border-color: var(--red);
+
+      box-shadow:
+        0 0 30px rgba(255, 54, 94, 0.22);
+    }
+
+    body.fail #brand {
       color: var(--red);
     }
 
-    body.fail #msg { display: block; }
+    body.fail #spin {
+      display: none;
+    }
+
+    body.fail .pulse {
+      border-color: var(--red);
+      animation: none;
+    }
+
+    body.fail .core {
+      background: var(--red);
+      box-shadow: 0 0 15px var(--red);
+      animation: none;
+    }
+
+    #msg {
+      position: fixed;
+
+      left: 50%;
+      bottom: 78px;
+
+      transform: translateX(-50%);
+
+      display: none;
+
+      width: 90%;
+
+      text-align: center;
+
+      font-family: monospace, sans-serif;
+      font-size: 11px;
+
+      letter-spacing: 0.18em;
+
+      color: var(--red);
+    }
+
+    body.fail #msg {
+      display: block;
+    }
 
     #footer {
       position: fixed;
+
       bottom: 25px;
+
       font-family: monospace, sans-serif;
+
       font-size: 9px;
-      letter-spacing: .22em;
-      color: rgba(140,210,170,.4);
+
+      letter-spacing: 0.22em;
+
+      color: rgba(140, 210, 170, 0.4);
     }
 
-    #footer::before { content: "◆ "; color: var(--green); }
-    #wrap { padding: 0; }
-    #state, #out { display: none; }
+    #footer::before {
+      content: "◆ ";
 
-    /* Modo Log */
-    body.log { display: block; overflow: auto; padding: 20px; background: var(--bg); }
-    body.log::before, body.log::after, body.log #main-container, body.log #footer { display: none; }
-    body.log #wrap { display: block; max-width: 900px; margin: 0 auto; }
-    body.log #state { display: block; margin-bottom: 12px; font-family: monospace, sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
-    body.log #out { display: block; max-height: calc(100vh - 100px); overflow-y: auto; padding: 16px; white-space: pre-wrap; font: 12px/1.6 monospace, sans-serif; color: var(--text); background: rgba(255,255,255,.025); border: 1px solid rgba(0,255,136,.15); border-radius: 12px; }
+      color: var(--green);
+    }
 
-    .ok, .safe { color: var(--green); }
-    .bad, .danger { color: var(--red); }
-    .warn { color: #e3b341; }
-    code { color: #72c99c; font-family: monospace, sans-serif; }
+    #wrap {
+      padding: 0;
+    }
 
-    /* Animaciones Ultraligeras */
-    @keyframes reactor { 0%, 100% { transform: rotate(45deg) scale(.92); } 50% { transform: rotate(45deg) scale(1.08); } }
-    @keyframes diamond { from { transform: rotate(45deg); } to { transform: rotate(405deg); } }
-    @keyframes pulseBox { 0%, 100% { transform: rotate(45deg) scale(.82); opacity: .25; } 50% { transform: rotate(45deg) scale(1); opacity: .8; } }
-    @keyframes energy { 0%, 100% { width: 35px; opacity: .15; } 50% { width: 180px; opacity: 1; } }
-    @keyframes successCore { 0%, 100% { transform: rotate(45deg) scale(1); } 50% { transform: rotate(45deg) scale(1.16); } }
+    #state,
+    #out {
+      display: none;
+    }
+
+    body.log {
+      display: block;
+
+      overflow: auto;
+
+      padding: 20px;
+
+      background: var(--bg);
+    }
+
+    body.log::before,
+    body.log::after,
+    body.log #main-container,
+    body.log #footer {
+      display: none;
+    }
+
+    body.log #wrap {
+      display: block;
+
+      max-width: 900px;
+
+      margin: 0 auto;
+    }
+
+    body.log #state {
+      display: block;
+
+      margin-bottom: 12px;
+
+      font-family: monospace, sans-serif;
+
+      font-size: 18px;
+      font-weight: 700;
+
+      color: var(--text);
+    }
+
+    body.log #out {
+      display: block;
+
+      max-height: calc(100vh - 100px);
+
+      overflow-y: auto;
+
+      padding: 16px;
+
+      white-space: pre-wrap;
+
+      font:
+        12px/1.6
+        monospace,
+        sans-serif;
+
+      color: var(--text);
+
+      background: rgba(255, 255, 255, 0.02);
+
+      border:
+        1px solid
+        rgba(0, 255, 136, 0.12);
+
+      border-radius: 12px;
+    }
+
+    .ok,
+    .safe {
+      color: var(--green);
+    }
+
+    .bad,
+    .danger {
+      color: var(--red);
+    }
+
+    .warn {
+      color: #e3b341;
+    }
+
+    code {
+      color: #72c99c;
+      font-family: monospace, sans-serif;
+    }
+
+    @keyframes reactor {
+      0%,
+      100% {
+        transform: rotate(45deg) scale(0.94);
+      }
+
+      50% {
+        transform: rotate(45deg) scale(1.06);
+      }
+    }
+
+    @keyframes diamond {
+      from {
+        transform: rotate(45deg);
+      }
+
+      to {
+        transform: rotate(405deg);
+      }
+    }
+
+    @keyframes pulseBox {
+      0%,
+      100% {
+        transform: rotate(45deg) scale(0.86);
+        opacity: 0.25;
+      }
+
+      50% {
+        transform: rotate(45deg) scale(1);
+        opacity: 0.7;
+      }
+    }
+
+    @keyframes energy {
+      0%,
+      100% {
+        width: 35px;
+        opacity: 0.15;
+      }
+
+      50% {
+        width: 180px;
+        opacity: 1;
+      }
+    }
+
+    @keyframes successCore {
+      0%,
+      100% {
+        transform: rotate(45deg) scale(1);
+      }
+
+      50% {
+        transform: rotate(45deg) scale(1.12);
+      }
+    }
 
     #exploit-title {
       position: fixed;
+
       top: 22px;
       left: 50%;
+
       transform: translateX(-50%);
+
       z-index: 10;
+
       padding: 10px 22px;
+
       color: var(--green);
-      border: 1px solid rgba(0,255,136,.55);
+
+      border:
+        1px solid
+        rgba(0, 255, 136, 0.5);
+
       border-radius: 10px;
-      background: rgba(2,12,7,.9);
+
+      background: rgba(2, 12, 7, 0.9);
+
       font-family: monospace, sans-serif;
+
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: .10em;
+
+      letter-spacing: 0.10em;
+
       text-align: center;
+
       white-space: nowrap;
     }
 
     #credits {
       position: fixed;
+
       left: 50%;
       bottom: 48px;
+
       transform: translateX(-50%);
+
       z-index: 10;
+
       width: min(92vw, 700px);
+
       color: var(--green);
+
       font-family: monospace, sans-serif;
+
       font-size: 10px;
       line-height: 1.5;
-      letter-spacing: .05em;
+
+      letter-spacing: 0.05em;
+
       text-align: center;
     }
 
-    body.log #exploit-title, body.log #credits { display: none; }
+    body.log #exploit-title,
+    body.log #credits {
+      display: none;
+    }
 
     @media (max-width: 600px) {
-      #exploit-title { top: 12px; padding: 8px 12px; font-size: 8px; }
-      #credits { bottom: 42px; font-size: 8px; padding: 0 12px; }
+      #exploit-title {
+        top: 12px;
+
+        padding: 8px 12px;
+
+        font-size: 8px;
+      }
+
+      #credits {
+        bottom: 42px;
+
+        padding: 0 12px;
+
+        font-size: 8px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div id="exploit-title">CARGA DE EXPLOIT GOLDHEN 11.00 A 13.52</div>
-
-  <div id="main-container">
-    <div id="brand">HOST:PERRUNOGT</div>
-    <div id="visual-indicator">
-      <div id="spin"></div>
-      <div class="pulse"></div>
-      <div class="core"></div>
-    </div>
+  <div id="exploit-title">
+    CARGA DE EXPLOIT GOLDHEN 11.00 A 13.52
   </div>
 
-  <div id="msg">Restart your console</div>
+  <div id="main-container">
 
-  <div id="credits">Agradecimientos a Raw game y sistro por la distribución del exploit y carga de GoldHEN</div>
+    <div id="brand">
+      HOST:PERRUNOGT
+    </div>
+
+    <div id="visual-indicator">
+
+      <div id="spin"></div>
+
+      <div class="pulse"></div>
+
+      <div class="core"></div>
+
+    </div>
+
+  </div>
+
+  <div id="msg">
+    Restart your console
+  </div>
+
+  <div id="credits">
+    Agradecimientos a Raw game y sistro por la distribución del exploit y carga de GoldHEN
+  </div>
 
   <div id="wrap">
     <div id="state"></div>
@@ -310,8 +664,9 @@
     PERRUNOGT // GOLDHEN HOST
   </div>
 
-  <!-- Carga limpia de JS asignando prioridad de hilo -->
-  <script src="./jb.js?v=10" defer></script>
+  <script type="module">
+    import "./jb.js?v=10";
+  </script>
 
 </body>
 </html>
