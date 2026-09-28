@@ -15,7 +15,6 @@
       --muted: #537565;
       --red: #ff365e;
       --gold: #ffea00;
-      --gold-glow: #ffe600;
     }
 
     * {
@@ -86,8 +85,6 @@
       box-shadow:
         0 10px 35px rgba(0, 0, 0, 0.72),
         0 0 18px rgba(0, 255, 136, 0.07);
-
-      transition: border-color 0.4s ease, box-shadow 0.4s ease;
     }
 
     #main-container::before,
@@ -101,7 +98,6 @@
 
       border-color: var(--green);
       opacity: 0.7;
-      transition: border-color 0.4s ease;
     }
 
     #main-container::before {
@@ -138,8 +134,6 @@
 
       text-shadow:
         0 0 8px rgba(0, 255, 136, 0.55);
-
-      transition: color 0.4s ease, text-shadow 0.4s ease;
     }
 
     #brand::before {
@@ -188,7 +182,6 @@
         0 0 14px var(--green);
 
       z-index: 5;
-      transition: background 0.4s ease, box-shadow 0.4s ease;
     }
 
     .core::before {
@@ -219,7 +212,6 @@
       border: 1px solid rgba(0, 255, 136, 0.18);
 
       transform: rotate(45deg);
-      transition: border-color 0.4s ease;
     }
 
     #visual-indicator::after {
@@ -278,10 +270,9 @@
       border: 1px dashed rgba(0, 255, 136, 0.16);
 
       transform: rotate(45deg);
-      transition: border-color 0.4s ease;
     }
 
-    /* ESTADON DE ÉXITO (GOLDHEN ACTIVADO) */
+    /* ESTADO EXITO (GOLDHEN ACTIVADO EN AMARILLO NEÓN) */
     body.done #main-container {
       border-color: rgba(255, 234, 0, 0.7);
 
@@ -311,20 +302,24 @@
       background: var(--gold);
 
       box-shadow:
-        0 0 25px var(--gold-glow);
+        0 0 25px var(--gold);
     }
 
+    /* CAMBIO DE CARTEL Y COLORES EN CSS PURO */
     body.done #exploit-title {
       color: var(--gold);
       border-color: var(--gold);
       background: rgba(18, 15, 0, 0.96);
       box-shadow: 0 0 15px rgba(255, 234, 0, 0.35);
+      font-size: 0; /* Oculta el texto original sin romper layout */
     }
 
-    body.done #footer::before {
-      color: var(--gold);
+    body.done #exploit-title::after {
+      content: "GOLDHEN ACTIVADO";
+      font-size: 11px;
     }
 
+    body.done #footer::before,
     body.done #credits {
       color: var(--gold);
     }
@@ -431,7 +426,6 @@
       text-align: center;
 
       white-space: nowrap;
-      transition: all 0.4s ease;
     }
 
     #credits {
@@ -456,7 +450,6 @@
       letter-spacing: 0.05em;
 
       text-align: center;
-      transition: color 0.4s ease;
     }
 
     #wrap {
@@ -557,6 +550,10 @@
         font-size: 8px;
       }
 
+      body.done #exploit-title::after {
+        font-size: 8px;
+      }
+
       #credits {
         bottom: 42px;
         font-size: 8px;
@@ -604,16 +601,6 @@
 
   <script type="module">
     import "./jb.js?v=10";
-
-    // Observador para detectar cuándo el exploit añade la clase 'done' al body
-    const observer = new MutationObserver(() => {
-      if (document.body.classList.contains("done")) {
-        const title = document.getElementById("exploit-title");
-        if (title) title.textContent = "GOLDHEN ACTIVADO";
-      }
-    });
-
-    observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
   </script>
 
 </body>
